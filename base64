@@ -1,0 +1,23 @@
+		// 获得项目的路径
+		ServletContext sc = request.getSession().getServletContext();
+		//替换头标记，防止出现文件损坏问题
+		String sub="";
+		sub=vsface.replaceAll("data:image/jpeg;base64,", "");
+		BASE64Decoder decoder = new BASE64Decoder();  
+             //Base64解码  
+             byte[] b = decoder.decodeBuffer(sub);  
+             for(int i=0;i<b.length;++i)  
+            {  
+                 if(b[i]<0)  
+                 {//调整异常数据  
+                     b[i]+=256;  
+                  }  
+             }
+ 			// 上传位置
+ 			String path = sc.getRealPath("/img") + "/"; // 设定文件保存的目录
+              //生成jpeg图片  
+ 			 UUID newFileName2 = UUID.randomUUID();
+              String imgFilePath =path+newFileName2+".jpg";//新生成的图片  
+             OutputStream out = new FileOutputStream(imgFilePath);
+             out.write(b);  
+             String userimg = "http://IP:8080/h5app/img/" + newFileName2 + ".jpg";

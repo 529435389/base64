@@ -1,3 +1,7 @@
+		@RequestParam
+			String vsface,HttpServletRequest request, ModelMap model,HttpServletResponse response
+			
+			//以字符串形式接收
 		// 获得项目的路径
 		ServletContext sc = request.getSession().getServletContext();
 		//替换头标记，防止出现文件损坏问题
